@@ -1,4 +1,5 @@
 # node-red-contrib-ssh-v2
+Available on NPM as https://www.npmjs.com/package/node-red-contrib-ssh-v2-reconnection <br>
 Based on https://github.com/yroffin/node-red-contrib-ssh which does not seem to be maintained.
 
 # Why?
