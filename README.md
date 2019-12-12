@@ -1,6 +1,10 @@
 # node-red-contrib-ssh-v2
 Based on https://github.com/yroffin/node-red-contrib-ssh which does not seem to be maintained.
 
+# Why?
+I added this so I could turn on my linux HTPC via Alexa, triggering a WOL packet and then turn it off using SSH.<br>
+That's why SSH reconnection was important.
+
 # Changelog
 - fix unusable ssh key config
 - add reconnection attempts to the ssh client
