@@ -1,10 +1,10 @@
 {
-    "name": "node-red-contrib-ssh-client",
+    "name": "node-red-contrib-ssh-v2",
     "version": "0.0.1",
-    "description": "A Node-RED node for runing remote ssh command.",
+    "description": "A Node-RED node for running remote ssh commands and supports reconnection attempts. Based on https://github.com/yroffin/node-red-contrib-ssh",
     "repository": {
         "type": "git",
-        "url": "git@github.com:yroffin/node-red-contrib-ssh.git"
+        "url": "git@github.com:okuster/node-red-contrib-ssh-v2.git"
     },
     "keywords": [
         "node-red",
@@ -13,24 +13,28 @@
         "client"
     ],
     "author": {
-        "name": "Yannick Roffin",
-        "email": "yroffin@gmail.com",
-        "url": "https://github.com/yroffin"
+        "name": "Oliver Kuster",
+        "email": "olivervbk@gmail.com",
+        "url": "https://github.com/olivervbk"
     },
     "contributors": [
-        {}
+        {
+            "name": "Yannick Roffin",
+            "email": "yroffin@gmail.com",
+            "url": "https://github.com/yroffin"
+        }
     ],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/yroffin/node-red-contrib-ssh/issues"
+        "url": "https://github.com/olivervbk/node-red-contrib-ssh-v2/issues"
     },
     "node-red": {
         "nodes": {
-            "ssh-client": "src/ssh-client.js"
+            "ssh-client-v2": "src/ssh-client-v2.js"
         }
     },
     "dependencies": {
         "ssh2": "0.8.2"
     },
-    "homepage": "https://github.com/yroffin/node-red-contrib-ssh"
+    "homepage": "https://github.com/olivervbk/node-red-contrib-ssh-v2"
 }
