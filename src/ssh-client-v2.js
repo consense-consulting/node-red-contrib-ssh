@@ -27,11 +27,10 @@ module.exports = function (RED) {
         client.on('close', (err) => {
             isConnected = false;
             node.status({ fill: "red", shape: "dot", text: 'Disconnected' });
-            node.error('Ssh client was closed.', err);
         });
 
         client.on('error', (err) => {
-            node.error('Ssh client error', err);
+
         });
 
         //node.log("SSH Key:"+config.ssh);
@@ -46,7 +45,7 @@ module.exports = function (RED) {
 
         // Handle node close
         node.on('close', function () {
-            node.warn('Ssh client dispose');
+            node.log('Ssh client dispose');
             client && client.close();
             client && client.dispose();
         });
@@ -59,45 +58,49 @@ module.exports = function (RED) {
             privateKey: config.ssh ? require('fs').readFileSync(config.ssh) : undefined
         };
 
-        // Session handler
-        var session = {
-            code: 0,
-            stdout: [],
-            stderr: []
-        };
-
-        var notify = (type, data) => {
-            switch (type) {
-                case 0:
-                    session.code = data;
-                    node.send(session);
-                    session = {
-                        code: 0,
-                        stdout: [],
-                        stderr: []
-                    };
-                    break;
-                case 1:
-                    session.stdout.push(data.toString());
-                    break;
-                case 2:
-                    session.stderr.push(data.toString());
-                    break;
-            }
-        };
-
-        node.on('input', (msg) => {
+        node.on('input', (msg, send) => {
             if (!msg.payload) {
                 node.warn("Invalid msg.payload.");
                 return;
             }
+
+            // Session handler
+            var session = {
+                code: 0,
+                stdout: [],
+                stderr: []
+            };
+
+            var notify = (type, data) => {
+                switch (type) {
+                    case 0:
+                        session.code = data;
+                        msg.session = session;
+                        send(msg);
+                        session = {
+                            code: 0,
+                            stdout: [],
+                            stderr: []
+                        };
+                        break;
+                    case 1:
+                        session.stdout.push(data.toString());
+                        break;
+                    case 2:
+                        session.stderr.push(data.toString());
+                        break;
+                }
+            };
+
             node.debug("Getting client connection...");
             _connectClient((conn) => {
                 conn.exec(msg.payload, (err, stream) => {
-                    node.log("Ssh client error in input.");
-                    if (err) throw err;
+                    if (err) {
+                        node.log("Ssh client error in input.");
+                        throw err;
+                    }
                     stream.on('close', function (code, signal) {
-                        node.warn('Stream :: close :: code: ' + code + ', signal: ' + signal);
+                        node.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
                         conn.end();
                         notify(0, code);
                     }).on('data', (data) => {

@@ -1,10 +1,10 @@
 {
-    "name": "node-red-contrib-ssh-v2-reconnection",
+    "name": "node-red-contrib-ssh",
     "version": "0.0.2",
     "description": "A Node-RED node for running remote ssh commands and supports reconnection attempts. Based on https://github.com/yroffin/node-red-contrib-ssh",
     "repository": {
         "type": "git",
-        "url": "git@github.com:okuster/node-red-contrib-ssh-v2.git"
+        "url": "git@github.com:nofr1ends/node-red-contrib-ssh.git"
     },
     "keywords": [
         "node-red",
@@ -12,21 +12,10 @@
         "ssl",
         "client"
     ],
-    "author": {
-        "name": "Oliver Kuster",
-        "email": "olivervbk@gmail.com",
-        "url": "https://github.com/olivervbk"
-    },
-    "contributors": [
-        {
-            "name": "Yannick Roffin",
-            "email": "yroffin@gmail.com",
-            "url": "https://github.com/yroffin"
-        }
-    ],
+    "author": "Jonas Bernemann",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/olivervbk/node-red-contrib-ssh-v2/issues"
+        "url": "https://github.com/nofr1ends/node-red-contrib-ssh/issues"
     },
     "node-red": {
         "nodes": {
@@ -34,7 +23,7 @@
         }
     },
     "dependencies": {
-        "ssh2": "0.8.2"
+        "ssh2": "0.8.9"
     },
-    "homepage": "https://github.com/olivervbk/node-red-contrib-ssh-v2"
+    "homepage": "https://github.com/nofr1ends/node-red-contrib-ssh"
 }
