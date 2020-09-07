@@ -1,6 +1,6 @@
 {
-    "name": "node-red-contrib-ssh",
-    "version": "0.0.2",
+    "name": "node-red-contrib-ssh-coco",
+    "version": "0.2.0",
     "description": "A Node-RED node for running remote ssh commands and supports reconnection attempts. Based on https://github.com/yroffin/node-red-contrib-ssh",
     "repository": {
         "type": "git",
@@ -23,6 +23,7 @@
         }
     },
     "dependencies": {
+        "async-mutex": "^0.2.4",
         "ssh2": "0.8.9"
     },
     "homepage": "https://github.com/nofr1ends/node-red-contrib-ssh"

@@ -1,14 +1,16 @@
 # node-red-contrib-ssh-v2
-Available on NPM as https://www.npmjs.com/package/node-red-contrib-ssh-v2-reconnection <br>
-Based on https://github.com/yroffin/node-red-contrib-ssh which does not seem to be maintained.
+Available on NPM as https://www.npmjs.com/package/node-red-contrib-ssh-coco <br>
+Based on node-red-contrib-ssh-coco to fix multiple issues with multiple ssh nodes and with processing
+multiple messages at the same time
 
 # Why?
 I added this so I could turn on my linux HTPC via Alexa, triggering a WOL packet and then turn it off using SSH.<br>
 That's why SSH reconnection was important.
 
 # Changelog
-- fix unusable ssh key config
-- add reconnection attempts to the ssh client
+- fix multiple ssh nodes in one flow
+- fix processing of multiple messages at the same time
+- output of ssh node now contained the original message and the ssh session
 
 # Usage
 Input: msg.payload has to contain the command. <br>
