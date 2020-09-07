@@ -5,9 +5,7 @@ const { Mutex } = require('async-mutex');
 
 module.exports = function (RED) {
     async function _connectClient(node, callback){
-        node.log("Waiting for connect mutex");
         const release = await node.connectMutex.acquire();
-        node.log("Mutex acquired!");
 
         if(node.isConnected) {
             release();
@@ -108,11 +106,9 @@ module.exports = function (RED) {
                 }
             };
 
-            node.debug("Getting client connection...");
 
             await _connectClient(node, (conn) => {
                 node.continue = () => {
-                    node.log("Continue with next command");
                     release();
                 };
 
@@ -132,7 +128,6 @@ module.exports = function (RED) {
                 });
 
                 if(wait) {
-                    node.log("We can continue directly with more commands");
                     node.continue = null;
                     release();
                 }
