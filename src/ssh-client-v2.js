@@ -35,7 +35,9 @@ module.exports = function (RED) {
             node.status({ fill: "red", shape: "dot", text: "Disconnected" });
         });
 
-        node.client.on('error', () => {
+        node.client.on('error', (err) => {
+            node.status({fill: "red", shape: "dot", text: err});
+            node.log(err);
             release();
             node.isConnected = false;
         });
