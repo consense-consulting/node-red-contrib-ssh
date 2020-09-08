@@ -4,7 +4,7 @@ const { Client } = require('ssh2');
 const { Mutex } = require('async-mutex');
 
 module.exports = function (RED) {
-    async function _connectClient(node, callback){
+    async function _connectClient(node, callback, failed = undefined){
         const release = await node.connectMutex.acquire();
 
         if(node.isConnected) {
@@ -40,6 +40,10 @@ module.exports = function (RED) {
             node.log(err);
             release();
             node.isConnected = false;
+
+            if(failed) {
+                failed(err);
+            }
         });
 
         node.client.on('continue', () => {
@@ -133,6 +137,9 @@ module.exports = function (RED) {
                     node.continue = null;
                     release();
                 }
+            }, (err) => {
+                release();
+                node.error(err, msg);
             });
         });
 
